@@ -18,10 +18,35 @@ Q: Why we need it ?
 Ans: look we have to set the condition (once yaani 1 bar) for error handling in just one file, and we can use it everywhere for same errors.
 doing this, we don't need to set same condition again and again in file. it will handle backend error itself.
 
-9) Make folder for it "utils" and "ErrorHandler" file into it, We set their "class" for settlement of errors and import it in "middleware" folder "error.js" file, and after that finally we set the "Middleware for Error" in app.js file
+9) 1st type error ("ErrorHandler"): Make folder for it "utils" in backend folder and "ErrorHandler" file into it, We set their "class" for settlement of errors and import it in "middleware" folder "error.js" file, and after that finally we set the "Middleware for Error" in app.js file
+
 10) Now we are replacing "ErrorHandler" with others if else condition for specific error in "ProductController" file
 
-11) Now We shall also set enviroment for "async" error handling, because it is said whenever you used "async" then you should must use "try-catch" b/c it is good practice
+11) 2nd type error("catchAsyncErrors):  Now We shall also set enviroment for "async" error handling, because it is said whenever you used "async" then you should must use "try-catch" b/c it is good practice
+
+12) Create file "catchAsyncErrors" and wrap async functions with it in "ProductController" file like * catchAsyncErrors(async ()=>{}) *
+
+13) 3rd type error ("unhandled promise rejection"):  There is also an error exist, suppose if we change string in "config.env" file, so here we also hand;e this error
+    this type of error called "unhandled promise rejection", and it is related to "MongoDB" connection
+    such as: * Connection Error is:  MongoParseError: Invalid connection string  * in this case our server didn't crash completely,
+    So we have to crash our server completely in this case, taky insult na ho hamari(hahahaha)
+14) so, goto "Server.js" file at the very bottom and create the logic code for shutting down the server.
+
+15) 4th type error (unCaught Error): It occurs when we use that variable which is not defined!
+
+16) For it goto "Server.js" file at the very top
+
+17) 5th type error (MongoDB Error => Cast to ObjectId failed for value \"66255de2cb2dde\"): It occurs when we give the id inappropriate means uncomplete for getting specific product
+
+18) So, goto "error.js" file and create logic there "Wrong MongoDB id Error"
+
+
+************************  Search Filter & Pagination at backend side *************************
+
+
+
+
+
 
 
 
