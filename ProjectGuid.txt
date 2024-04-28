@@ -1,0 +1,28 @@
+* Setting up the backend in backend folder *
+
+********************   Setup  & Product Routing     **********************
+
+1) set Server settings ("Server.js","App.js")
+2) add additional things in Scripts in package.json file ==>
+  "start":"node backend/Server.js",  // for server starting at production time
+  "dev":"nodemon backend/Server.js"  // Automatically server starting for development time
+3) Add "controller" & "routes" folders and related files for controlling the routes
+4) import all routes in App.js file
+5) Connect MongoDB with Server, Create  "Mydatabase.js" (You can give him any file_name) in config folder
+6) import "connectDatabase()" from "Mydatabase.js" file and call it after "dotenv.config" line
+7) Start Making Product Api's now, means *Product Model or Product Schema*, So create folder "models" and  "ProductModel.js" file into it, after it import it in "ProductController.js" then "createProduct" there and then import it in "ProductRoute"
+8) Till Now we build CRUD Apis of product, and also test them. 
+
+*******************   Error Handling For Backend    *******************
+Q: Why we need it ?
+Ans: look we have to set the condition (once yaani 1 bar) for error handling in just one file, and we can use it everywhere for same errors.
+doing this, we don't need to set same condition again and again in file. it will handle backend error itself.
+
+9) Make folder for it "utils" and "ErrorHandler" file into it, We set their "class" for settlement of errors and import it in "middleware" folder "error.js" file, and after that finally we set the "Middleware for Error" in app.js file
+10) Now we are replacing "ErrorHandler" with others if else condition for specific error in "ProductController" file
+
+11) Now We shall also set enviroment for "async" error handling, because it is said whenever you used "async" then you should must use "try-catch" b/c it is good practice
+
+
+
+
