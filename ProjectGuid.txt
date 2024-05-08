@@ -41,13 +41,32 @@ doing this, we don't need to set same condition again and again in file. it will
 18) So, goto "error.js" file and create logic there "Wrong MongoDB id Error"
 
 
-************************  Search Filter & Pagination at backend side *************************
+**********************  Search, Filter & Pagination at backend side **********************
 
+                               *******  Search ********
 
+19) Make file in "utils" with name "ApiFeatures.js", where we define the class for searching and import it in "ProductController.js" file
+20) Make "searchItem()" function in "ApiFeatures.js", for searching and called it in "ProductController.js" file right after new object creation of class "ApiFeatures(Product.find(), req.query)"
+21) Now test it on Postman giving "keyword and value" using params option there, After Confirm move on
 
+                               *******  Filter ********
 
+21) Make "filterByCategory()" function in "ApiFeatures.js", for Filering and called it in "ProductController.js" file right after new object creation of class "ApiFeatures(Product.find(), req.query)" 
 
+22) Now in " filterByCategory() " function we also apply the Filtering system by "Price and Rating" also, using this approach we can filter products base on price and rating, and checked on postman
+                                
+                               
+                               *******  Pagenation ********
 
+Now we also apply the pagenation to set limited count of items on page,
+
+23) Now in " ApiFeatures " class we also apply pagenation system by defining "pagenation" function
+24) define "ItemsPerPage" variable in "ProductController.js" file in "getAllProducts" function, and pass it in pagenation function as argument where "pagenation" function in "ProductController.js" is called !
+              
+              
+              *******  Authentication Admin Routes (User & Password Authentication) ********
+25)  
+26) 
 
 
 
