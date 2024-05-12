@@ -1,6 +1,6 @@
 const catchAsyncErrors = require("../middleware/catchAsyncErrors");
-const Product = require("../models/ProductModel"); //import from "models/ProductModel.js"
 const ErrorHandler = require("../utils/ErrorHandler");
+const Product = require("../models/ProductModel"); //import from "models/ProductModel.js"
 const ApiFeatures = require("../utils/ApiFeatures")
 //!Create Product (this action would be performed from Admin panel side)
 exports.createProduct = catchAsyncErrors(async (req, res, next) => {

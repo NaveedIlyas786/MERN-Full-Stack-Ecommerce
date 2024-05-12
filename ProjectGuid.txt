@@ -65,8 +65,11 @@ Now we also apply the pagenation to set limited count of items on page,
               
               
               *******  Authentication Admin Routes (User & Password Authentication) ********
-25)  
-26) 
+             
+25) first in "models" folder we have to make "UserModels" file with name "UserModels.js" where user model would be defined
+26) After it, in "controllers" folder we shall define the Controller with file name "UserController.js", where user would be controlled
+27) then finally, in "routes" folder we set the User routes in  "UserRoutes.js" file,
+28) And in "utils" folder we also define the jwtToken function in "jwtToken.js" file to send the jwt token where it is reuired
 
 
 
