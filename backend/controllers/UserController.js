@@ -4,7 +4,7 @@ const ErrorHandler = require("../utils/ErrorHandler");
 const User = require("../models/UserModels");
 const sendToken = require("../utils/jwtToken");
 
-// Register New User
+//! Register New User
 
 exports.registerUser = catchAsyncErrors(async (req, res, next) => {
   const { name, email, password } = req.body;
@@ -45,3 +45,22 @@ exports.loginUser = catchAsyncErrors(async (req, res, next) => {
   
   sendToken(findUser, 200, res)
 });
+
+
+//! After User Login we will make function of User Logout
+
+exports.logoutUser = catchAsyncErrors( async(req,res,next)=>{
+
+  res.cookie("token",null,{  //? Here we are setting here the token value to null (Means here we are setting that when token value would be null then 3rd parameter is that options, means then options section would execute)
+    expires:new Date(Date.now()),
+    httpOnly: true
+  } )
+
+  res.status(200).json({
+    success: true,
+    message: "Logout Successfully!"
+  })
+})
+
+
+

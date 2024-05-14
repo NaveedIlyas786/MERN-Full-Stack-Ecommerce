@@ -65,10 +65,21 @@ var ProductSchema = new mongoose.Schema({
         },
     }
   ],
+  
+  user: {  //! Here we are adding the user id using (ObjectId), below with userRole("admin") in created product object, who create this product
+    type: mongoose.Schema.ObjectId,
+    ref: "User", //? this "User" we obtained from userModels from last of file in which userSchema is stored
+    requird: true
+  },
+
   createdAt:{
     type:Date,
     default:Date.now
-  }
+  },
+
+
+
+
 });
 
 //! Now exports the model of it

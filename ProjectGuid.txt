@@ -71,5 +71,24 @@ Now we also apply the pagenation to set limited count of items on page,
 27) then finally, in "routes" folder we set the User routes in  "UserRoutes.js" file,
 28) And in "utils" folder we also define the jwtToken function in "jwtToken.js" file to send the jwt token where it is reuired
 
+29) Now we are going to implement a user that would access the specific actions or items when he would logged in, So make file with name "auth.js" in middleware folder 
+
+30) In (UserController, UserModels, UserRoutes) we implement there 29 point,still here we set the law for loginUser(a user can be anyone) to do somthing in just mentioned routed in "ProductRoutes.js" file, but now we are going to implement for Admin, means what what the Admin can do?
+
+31) we define the function "authorizedRole("admin")" in "auth.js" file to set which autrized things we want to assign to user with "userRole" => "admin", (create product, delete , update etc), and set it in ProductRoutes
+
+32) So, Now if you have partners with "userRole" admin, then it is necessary to know which admin created the product, so we have to pass that id of admin who created the product in new product created object
+
+33) We passed the the "user id" in new created "product" object by creating new property "user" in "ProductModel" and setting it before sending the request of creating the product in "ProductController.js" file
+
+
+
+
+
+
+
+
+
+
 
 

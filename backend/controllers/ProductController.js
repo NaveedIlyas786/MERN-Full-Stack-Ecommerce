@@ -4,6 +4,9 @@ const Product = require("../models/ProductModel"); //import from "models/Product
 const ApiFeatures = require("../utils/ApiFeatures")
 //!Create Product (this action would be performed from Admin panel side)
 exports.createProduct = catchAsyncErrors(async (req, res, next) => {
+
+  req.body.user = req.user.id
+
   const productitem = await Product.create(req.body);
   res.status(201).json({
     //? Here "201" means product created
