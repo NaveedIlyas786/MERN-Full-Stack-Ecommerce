@@ -2,6 +2,7 @@ const mongoose = require("mongoose");
 const validator = require("validator");
 const bcrypt = require("bcryptjs");
 const jwtToken = require("jsonwebtoken");
+const crypto = require("crypto"); // we don't need to install this, it is built_in function
 
 const userSchema = new mongoose.Schema({
   name: {
@@ -71,7 +72,23 @@ userSchema.methods.getJWTToken = function () {
 //!   *******   Compare Password "comparePassword" function  *********
 
 userSchema.methods.comparePassword = async function(enteredPassword){
-return await bcrypt.compare(enteredPassword, this.password)
+  return await bcrypt.compare(enteredPassword, this.password)
+}
+
+//!   **********   Generating Reset Password Token  ***********
+
+
+userSchema.methods.getResetPasswordToken = function(){
+  const resetToken = crypto.randomBytes(20).toString('hex');
+
+  //? Now we need to Hash it, and add to the userSchema
+  this.resetPasswordToken = crypto.createHash('sha256').update(resetToken).digest('hex');
+
+//? Now we have to set also the Token Expire Time, we set here 15 minutes
+
+  this.resetPasswordExpire = Date.now() + 15*60*1000;
+
+  return resetToken;
 }
 
 
