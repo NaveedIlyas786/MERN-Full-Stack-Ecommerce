@@ -3,14 +3,21 @@
 *******************   Setup  & Product Routing     *******************
 
 1) set Server settings (*Server.js*,*App.js*)
+
 2) add additional things in Scripts in package.json file ==>
   "start":"node backend/Server.js",  // for server starting at production time
   "dev":"nodemon backend/Server.js"  // Automatically server starting for development time
+
 3) Add "controller" & "routes" folders and related files for controlling the routes
+
 4) import all routes in App.js file
+
 5) Connect MongoDB with Server, Create  *Mydatabase.js* (You can give him any file_name) in config folder
+
 6) import *connectDatabase()* from *Mydatabase.js* file and call it after *dotenv.config* line
+
 7) Start Making Product Api's now, means *Product Model or Product Schema*, So create folder "models" and  "ProductModel.js" file into it, after it import it in "ProductController.js" then "createProduct" there and then import it in "ProductRoute"
+
 8) Till Now we build CRUD Apis of product, and also test them. 
 
 *******************   Error Handling For Backend    *******************
@@ -30,6 +37,7 @@ doing this, we don't need to set same condition again and again in file. it will
     this type of error called *unhandled promise rejection*, and it is related to "MongoDB" connection
     such as: *Connection Error is:  MongoParseError: Invalid connection string* in this case our server didn't crash completely,
     So we have to crash our server completely in this case, taky insult na ho hamari(hahahaha)
+
 14) so, goto *Server.js* file at the very bottom and create the logic code for shutting down the server.
 
 15) 4th type error (unCaught Error): It occurs when we use that variable which is not defined!
@@ -46,7 +54,9 @@ doing this, we don't need to set same condition again and again in file. it will
                     <!-- TODO: *** Search *** -->
 
 19) Make file in *utils* with name *ApiFeatures.js*, where we define the class for searching and import it in *ProductController.js* file
+
 20) Make *searchItem()* function in *ApiFeatures.js*, for searching and called it in *ProductController.js* file right after new object creation of class *ApiFeatures(Product.find(), req.query)*
+
 21) Now test it on Postman giving *keyword and value* using params option there, After Confirm move on
 
                 <!-- TODO: *** Filter *** -->
@@ -61,14 +71,18 @@ doing this, we don't need to set same condition again and again in file. it will
 Now we also apply the pagenation to set limited count of items on page,
 
 23) Now in *ApiFeatures* class we also apply pagenation system by defining *pagenation* function
+
 24) define *ItemsPerPage* variable in *ProductController.js* file in *getAllProducts* function, and pass it in pagenation function as argument where *pagenation* function in *ProductController.js* is called !
 
               
          <!-- TODO: *** Authentication Admin Routes (User & Password Authentication) *** -->
              
 25) first in *models* folder we have to make "UserModels" file with name *UserModels.js* where user model would be defined
+
 26) After it, in *controllers* folder we shall define the Controller with file name *UserController.js*, where user would be controlled
+
 27) then finally, in "routes" folder we set the User routes in  *UserRoutes.js* file,
+
 28) And in *utils* folder we also define the jwtToken function in *jwtToken.js* file to send the jwt token where it is reuired
 
 29) Now we are going to implement a user that would access the specific actions or items when he would logged in, So make file with name *auth.js* in middleware folder 
@@ -85,9 +99,23 @@ Now we also apply the pagenation to set limited count of items on page,
                       <!-- TODO: *** Reset password Token *** -->
 
 34) in *userModel.js* file make function *getResetPasswordToken* for Password Reset, and sending the token through *Node Mailor*
+
 35) in *userController.js* file make function of *forgotPassword*, in this we have to find the *user* from *database* using his/her email, and then we get the *reset Token* by calling the *getResetPasswordToken* function, and save it.
+
 36) After this, we have to prepare the link using *NodeMailor*, which has to be sent at the email for *password reset*, and options, means required structure information for sending email such as (email, subject, message) etc.
-37) Then we have to make function *sendEmail* in utils *sendEmail.js* file
+
+37) Then we have to make function *sendEmail* in utils *sendEmail.js* file, and there we set the *all Credentials* and configurations to send email, most important is that use *App password* of that email which is set *from* section, means from which person email has to be sent, email of that person.
+
+38) After testing it on postman, our email is sending successfully, Now we have obtained our *Reset Password Token* , and now we will make *request* on this token to proceed, so we shall make method for it.
+
+39) Ofcourse we shall get this link from URL bar means from params, And we shall *hash* it first after getting from params. and then we shall find the *user* from *mongoDb* database, and change its password with requested password, and save it, then also loggedin the user at the same by calling the function *sendToken* function. Now we shall set its route path also for its utilization. and then check it in postman
+
+40) Now one thing is remaining, if user try to *register* with the *same email* again, then he get the message unusual, So we have to set the response message to understand in a better way. So, goto folder *middleware* in *error.js* file: and set there the logic for duplication email registeration.
+
+41) Till here we have *completed* the *Backend User Authentication* in all cases
+
+
+                        <!-- TODO: *** Backend User Routes Api's *** -->
 
 
 
