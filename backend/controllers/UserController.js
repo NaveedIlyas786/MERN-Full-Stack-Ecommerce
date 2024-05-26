@@ -19,7 +19,7 @@ exports.registerUser = catchAsyncErrors(async (req, res, next) => {
       url: "Profile_Pic_Url",
     },
   });
- 
+
   sendToken(newUser, 201, res);
 });
 //! After User registeration we will make function of User Login
@@ -148,5 +148,126 @@ exports.resetPassword = catchAsyncErrors(async (req, res, next) => {
 
   //? After saving the user, we shall also login the user at the same time, so call sendtoken Function
 
-  sendToken(findedUser,200,res)
+  sendToken(findedUser, 200, res);
+});
+
+//! Get User Details (*By User Self* and it can only, when user is logged in, so there are no chance that user would not find)
+
+exports.getUserDetails = catchAsyncErrors(async (req, res, next) => {
+  const user = await User.findById(req.user.id);
+  if (!user) {
+    return next(new ErrorHandler("User not found!", 404));
+  }
+  res.status(200).json({
+    success: true,
+    user,
+  });
+});
+
+//! Update User Password (*By User Self* and it can only, when user is logged in, so there are no chance that user would not find)
+
+exports.UpdatePassword = catchAsyncErrors(async (req, res, next) => {
+  const user = await User.findById(req.user.id).select("+password"); //? Here first we find the user and then target the field "password" section
+
+  const isPasswordMatched = await user.comparePassword(req.body.oldPassword);
+
+  if (!isPasswordMatched) {
+    return next(new ErrorHandler("Old Password is inCorrect!", 400)); //? 400 means bad request due to wrong "syntax or Url" of request
+  }
+
+  if (req.body.newPassword !== req.body.confirmPassword) {
+    return next(new ErrorHandler("Password does not Matched!", 400)); //? 400 means bad request due to wrong "syntax or Url" of request
+  }
+
+  user.password = req.body.newPassword; //? here Now our password is changed with new password
+
+  await user.save();
+
+  sendToken(user, 200, res);
+});
+
+//! Update User Profile (and it can only, when user is logged in, so there are no chance that user would not find)
+
+exports.UpdateProfile = catchAsyncErrors(async (req, res, next) => {
+  const newUserData = {
+    name: req.body.name,
+    email: req.body.email,
+    //? We shall add cloudnary later for profile avatar
+  };
+
+  const user = await User.findByIdAndUpdate(req.user.id, newUserData, {
+    new: true,
+    runValidators: true,
+    // userFindAndModify: false
+  }); //? Here we set the existing user id with new data
+
+  res.status(200).json({
+    success: true,
+    user,
+  });
+});
+
+//! Get All Users Details (through --Admin)
+
+exports.getAllUsers = catchAsyncErrors(async(req,res,next)=>{
+  const Allusers = await User.find();
+
+  res.status(200).json({
+    success: true,
+    Allusers
+  })
+})
+//! Get Single User Details (through --Admin)
+
+exports.getSingleUser = catchAsyncErrors(async(req,res,next)=>{
+  const SingleUser = await User.findById(req.params.id);
+
+  if(!SingleUser){
+    return next(new ErrorHandler(`User Not found, with id ${req.params.id}`))
+  }
+
+  res.status(200).json({
+    success: true,
+    SingleUser
+  })
+})
+
+//! Update User Role (Through --Admin)
+
+exports.UpdateUserRole = catchAsyncErrors(async (req, res, next) => {
+  const newUserData = {
+    name: req.body.name,
+    email: req.body.email,
+    userRole: req.body.userRole,
+    //? We shall add cloudnary later for profile avatar
+  };
+
+  const UpdateUser = await User.findByIdAndUpdate(req.params.id, newUserData, {
+    new: true,
+    runValidators: true,
+    // userFindAndModify: false
+  }); //? Here we set the existing user id with new data
+
+  res.status(200).json({
+    success: true,
+    UpdateUser,
+  });
+});
+
+//! Delete User (Through --Admin)
+
+exports.DeleteUser = catchAsyncErrors(async (req, res, next) => {
+
+  const FindedUser = await User.findById(req.params.id);
+  //? We shall remove cloudnary later for profile avatar
+ 
+  if(!FindedUser){
+    return next(new ErrorHandler(`User Not found! with id ${req.params.id}`))
+  }
+
+  await FindedUser.remove();
+  res.status(200).json({
+    success: true,
+    message:"User Deleted Successfully!",
+  });
 });

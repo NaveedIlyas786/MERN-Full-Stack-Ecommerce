@@ -115,7 +115,29 @@ Now we also apply the pagenation to set limited count of items on page,
 41) Till here we have *completed* the *Backend User Authentication* in all cases
 
 
-                        <!-- TODO: *** Backend User Routes Api's *** -->
+                        <!-- TODO: *** Backend User Routes Api's Start*** -->
+   ***Means If user want to check his profile info, update it or password Update etc***
+
+42) Here we shall make function "getUserDetails" to get user details and set the route in userRoutes (for logged in user)
+
+43) After this we shall make function "UpdatePassword" to update user password and set the route in userRoutes (for logged in user)
+
+44) Now we make function *UpdateProfile* for update the user Profile (all information except password) and set the route in *userRoutes*
+
+    ***Handover the authority to Admin to take action over "Users and Products" also***
+
+ Means we add the *admin* word in api of create new,update,delete product, which means only admin can do this.
+
+45) We make functions like *UpdateUserRole* and *DeleteUser* and set their route paths in *UserRoutes.js* file and this action only can do the Admin, means Only through Admin
+
+  ***Make function that any user can (add,update) the Reviews of products and Avergae of all reviews***
+
+46) Make functions *creatProductReview, getAllProductReviews, deleteUserReviews* in *ProductController.js* file and set their routes in *ProductRoutes.js* and finally done.
+
+
+                      <!-- TODO: *** Backend User Routes Api's End*** -->
+
+              <!-- TODO: *** Backend Controller Order Routes Api's Start*** -->
 
 
 
@@ -126,3 +148,19 @@ Now we also apply the pagenation to set limited count of items on page,
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+              

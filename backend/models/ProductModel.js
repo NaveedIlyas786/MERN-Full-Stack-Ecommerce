@@ -15,7 +15,7 @@ var ProductSchema = new mongoose.Schema({
     required: [true, "Please Enter Product Price!"],
     maxLength: [8, "Price can't exceed than 8 figures"],
   },
-  rating: {
+  ratings: {
     type: Number,
     default: 0,
   },
@@ -51,6 +51,11 @@ var ProductSchema = new mongoose.Schema({
   },
   reviews:[
     {
+      user: {  
+        type: mongoose.Schema.ObjectId,
+        ref: "User", //? this "User" we obtained from userModels from last of file in which userSchema is stored
+        requird: true
+      },
         name:{
             type:String,
             required:true
