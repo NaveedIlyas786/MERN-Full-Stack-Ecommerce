@@ -53,13 +53,24 @@ exports.getSingleOrder = catchAsyncErrors(async (req, res, next) => {
 //! Get All Orders of Logged in User (User Self)
 
 exports.myOrders = catchAsyncErrors(async (req, res, next) => {
-  const orders = await Order.find({ user: req.user._id });
+  console.log("User ID from req.user:", req.user._id); // Log the user ID
+  try {
+   const orders = await Order.find({ user: req.user._id });
+    console.log("My Orders:", orders); // Log the user ID
 
-  res.status(200).json({
-    success: true,
-    orders,
-  });
+    if (!orders) {
+      return next(new ErrorHandler('No orders found for this user', 404));
+    }
+
+    res.status(200).json({
+      success: true,
+      orders,
+    });
+  } catch (error) {
+    return next(new ErrorHandler('Error fetching orders', 500));
+  }
 });
+
 
 //! Get All Orders --Admin
 
